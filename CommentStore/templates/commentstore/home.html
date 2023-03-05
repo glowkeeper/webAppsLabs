@@ -1,0 +1,25 @@
+{% extends 'commentstore/base.html' %}
+
+{% block title %}
+    Comment Store Homepage
+{% endblock %}
+
+{% block content %}
+    <h1>Comments</h1>
+    <table>
+        <tr>   
+            <th>Name</th>
+            <th>Date</th>
+            <th>Comment</th>
+        </tr>
+        {% for comment in cmnt_list %}
+            <tr>
+                <td>{{ comment.name }}</td>
+                <td>{{ comment.visitdate }}</td>
+                <td>{{ comment.commentstr }} </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br />
+    <a href="http://127.0.0.1:8000/commentstore/">Add a comment</a>
+{% endblock %}
