@@ -136,3 +136,7 @@ dist
 .pnp.*
 
 story-builder-api/extensions/endpoints/smtp.js
+
+# ignore pycache
+
+__pycache__/
