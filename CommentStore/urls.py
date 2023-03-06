@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from register import views as register_views 
+
 urlpatterns = [
     path('commentstore/', include('commentstoreapp.urls')),
     path('admin/', admin.site.urls),
+    path("register/", register_views.register_user, name="register")
 ]
