@@ -1,9 +1,12 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from commentstoreapp.commentstore import CommentStore
 from commentstoreapp.forms import InsertNewComment
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 @csrf_exempt
 def commentstore(request):
@@ -21,7 +24,7 @@ def commentstore(request):
             store.insertcomment(n, d, c)
             cmnt_list = list(store.commentlist.queue)
 
-        return render(request, "commentstore/home.html", {'cmnt_list': cmnt_list})
+        return redirect("home")
     else:
         form = InsertNewComment()
 
@@ -29,6 +32,7 @@ def commentstore(request):
 
 
 def home(request):
+    # logging.info("home:")
     store = CommentStore()
     cmnt_list = list(store.commentlist.queue)
     return render(request, "commentstore/home.html", {'cmnt_list': cmnt_list})

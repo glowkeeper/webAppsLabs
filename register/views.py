@@ -36,7 +36,8 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return render(request, "commentstore/home.html")
+                return redirect("home")
+                # return render(request, "commentstore/home.html")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
