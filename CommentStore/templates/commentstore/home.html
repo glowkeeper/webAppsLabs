@@ -1,12 +1,12 @@
 {% extends 'commentstore/base.html' %}
 
 {% block title %}
-    Comment Store Homepage
+    Comment Store
 {% endblock %}
 
 {% block content %}
 
-    <h2>Comment Store Homepage</h2>
+    <h2>Comment Store</h2>
 
     {% if user.is_authenticated %}        
         {% if cmnt_list|length > 0 %}
@@ -29,10 +29,9 @@
         {% else %}
             <h3>There are no comments for user: <em>{{user.username}}</em>.</h3>
         {% endif %} 
-        <a href="http://127.0.0.1:8000/commentstore/">Add a comment</a>
             
     {% else %}
-        <a href="http://127.0.0.1:8000/login/">Please login</a></h3>
+        <a href="/login">Please login</a></h3>
     {% endif %}
 
 {% endblock %}

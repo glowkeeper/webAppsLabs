@@ -22,5 +22,6 @@ urlpatterns = [
     path('commentstore/', include('commentstoreapp.urls')),
     path('admin/', admin.site.urls),
     path("register/", register_views.register_user, name="register"),
-    path("login/", register_views.login_user, name="login")
+    path("login/", register_views.login_user, name="login"),
+    path("logout/", register_views.logout_user, name="logout")
 ]

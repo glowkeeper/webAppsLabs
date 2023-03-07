@@ -1,54 +1,34 @@
-from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import render
 from commentstoreapp.commentstore import CommentStore
+from commentstoreapp.forms import InsertNewComment
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
-import logging
-
-logging.basicConfig(level=logging.INFO)
 
 @csrf_exempt
 def commentstore(request):
 
     store = CommentStore()
-    # raise Http404()
-    # html = "<html><body>Hello, Student. You're at the Comment Store Application.</body></html>"
-    # return HttpResponse(html)
-    if request.method == 'GET':
-        for header in request.headers.keys():
-            print(header + ":" + request.headers.get(header))
-        # get the django.http.response.HttpResponse object
-        response = render(request, 'commentstore/comment.html')
-        # set http response header and value.
-        response['Vary'] = 'Accept-Encoding'
-        # return the HttpResponse object.
-        return response
+    cmnt_list = []
 
     if request.method == 'POST':
-        date_object = datetime.strptime(request.POST.get('date'), '%d/%m/%Y').date()
-        store.insertcomment(request.POST.get('name'),
-                            date_object,
-                            request.POST.get('comment'))
-        # htmltable = "<table>\n" \
-        #             + "  <tr>\n" \
-        #             + "    <th>Name</th>\n" \
-        #             + "    <th>Date</th>\n" \
-        #             + "    <th>Comment</th>\n" \
-        #             + "  </tr>\n"
-        # for cmnt in list(store.commentlist.queue):
-        #     htmltable = htmltable + "  <tr>\n" \
-        #                 + "    <td>" + cmnt.name + "</td>\n" \
-        #                 + "    <td>" + str(cmnt.visitdate) + "</td>\n" \
-        #                 + "    <td>" + cmnt.commentstr + "</td>\n" \
-        #                 + "  </tr>\n";
-        # html = "<html><body> " + htmltable + "</body></html>"
-        # return HttpResponse(html)
-        return redirect('home')
+        form = InsertNewComment(request.POST)
+
+        if form.is_valid():
+            n = form.cleaned_data["name"]
+            c = form.cleaned_data["comment_str"]
+            d = form.cleaned_data["visit_date"]
+            store.insertcomment(n, d, c)
+            cmnt_list = list(store.commentlist.queue)
+
+        return render(request, "commentstore/home.html", {'cmnt_list': cmnt_list})
+    else:
+        form = InsertNewComment()
+
+    return render(request, "commentstore/comment.html", {"form": form})
 
 
 def home(request):
     store = CommentStore()
     cmnt_list = list(store.commentlist.queue)
-    #logging.info("Comments:\n{}".format(' '.join(map(str, cmnt_list))))
-    return render(request, "commentstore/home.html", {'cmnt_list': cmnt_list}) 
+    return render(request, "commentstore/home.html", {'cmnt_list': cmnt_list})
