@@ -5,36 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Comments</h1>
-    <table>
-        <tr>   
-            <th>Name</th>
-            <th>Date</th>
-            <th>Comment</th>
-        </tr>
-        {% for comment in cmnt_list %}
-            <tr>
-                <td>{{ comment.name }}</td>
-                <td>{{ comment.visitdate }}</td>
-                <td>{{ comment.commentstr }} </td>
-            </tr>
-        {% endfor %}
-    </table>
-{% endblock %}
 
+    <h2>Comment Store Homepage</h2>
 
-{% extends 'commentstore/base.html' %}
-
-{% block title %}
-    Comment Store Homepage
-{% endblock %}
-
-{% block content %}
-
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated %}        
         {% if cmnt_list|length > 0 %}
-            
-            <h5>User <em>{{user.username}}</em> comments:</h5>
+            <h3>User <em>{{user.username}}</em> comments:</h3>
             <br>
             <table>
                 <tr>
@@ -49,15 +25,14 @@
                         <td>{{ cmnt.commentstr }}</td>
                     </tr>
                 {% endfor %}
-            </table>            
-            <br />
-            <a href="http://127.0.0.1:8000/commentstore/">Add a comment</a>
-            
+            </table>
         {% else %}
-            <h5>There are no comments for user: <em>{{user.username}}</em>.</h5>
-        {% endif %}
+            <h3>There are no comments for user: <em>{{user.username}}</em>.</h3>
+        {% endif %} 
+        <a href="http://127.0.0.1:8000/commentstore/">Add a comment</a>
+            
     {% else %}
-        <h5>Comment Store Application Homepage. Please login to start ...</h5>
+        <a href="http://127.0.0.1:8000/login/">Please login</a></h3>
     {% endif %}
 
 {% endblock %}

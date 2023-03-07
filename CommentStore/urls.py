@@ -21,5 +21,6 @@ from register import views as register_views
 urlpatterns = [
     path('commentstore/', include('commentstoreapp.urls')),
     path('admin/', admin.site.urls),
-    path("register/", register_views.register_user, name="register")
+    path("register/", register_views.register_user, name="register"),
+    path("login/", register_views.login_user, name="login")
 ]
