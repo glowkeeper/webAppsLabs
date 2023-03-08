@@ -19,6 +19,7 @@ from django.urls import include, path
 from register import views as register_views 
 
 urlpatterns = [
+    path("", register_views.login_user),
     path('commentstore/', include('commentstoreapp.urls')),
     path('admin/', admin.site.urls),
     path("register/", register_views.register_user, name="register"),
