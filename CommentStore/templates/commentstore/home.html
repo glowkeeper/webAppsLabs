@@ -8,7 +8,7 @@
 
     <h2>Comment Store</h2>
 
-    {% if user.is_authenticated %}        
+    {% if user.is_authenticated %}
         {% if cmnt_list|length > 0 %}
             <h3>User <em>{{user.username}}</em> comments:</h3>
             <br>
@@ -21,17 +21,16 @@
                 {% for cmnt in cmnt_list %}
                     <tr>
                         <td>{{ cmnt.name }}</td>
-                        <td>{{ cmnt.visitdate }}</td>
-                        <td>{{ cmnt.commentstr }}</td>
+                        <td>{{ cmnt.visit_date }}</td>
+                        <td>{{ cmnt.comment_str }}</td>
                     </tr>
                 {% endfor %}
             </table>
         {% else %}
             <h3>There are no comments for user: <em>{{user.username}}</em>.</h3>
-        {% endif %} 
-            
+        {% endif %}
     {% else %}
-        <a href="/login">Please login</a></h3>
+        <a href="/login">Please login</a>
     {% endif %}
 
 {% endblock %}
