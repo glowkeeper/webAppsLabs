@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
 from commentstoreapp.forms import InsertNewComment
 from commentstoreapp.models import Comment
@@ -7,7 +7,7 @@ from commentstoreapp.models import Comment
 # import logging
 # logging.basicConfig(level=logging.INFO)
 
-@csrf_exempt
+@csrf_protect
 def commentstore(request):
 
     if request.method == 'POST':

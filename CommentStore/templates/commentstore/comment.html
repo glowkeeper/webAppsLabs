@@ -9,6 +9,7 @@
 {% block content %}
     <h4> Insert a comment: </h4>
     <form method="post" action="/commentstore/">
+        {% csrf_token %} 
         {{ form|crispy }}
         <br>
         <button type="submit" class="btn btn-primary">Submit Comment</button>

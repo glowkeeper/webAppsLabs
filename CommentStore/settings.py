@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'crispy_forms',
     'crispy_bootstrap5',
     'CommentStore',
@@ -129,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = "bootstrap5" 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5" 
+
+RUNSERVERPLUS_SERVER_ADDRESS_PORT = 'localhost:8000'
